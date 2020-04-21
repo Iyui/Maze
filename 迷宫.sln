@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "迷宫", "迷宫.csproj", "{8ACD26CF-9F12-4034-9F79-A1495D4D644E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8ACD26CF-9F12-4034-9F79-A1495D4D644E}.Debug|x86.ActiveCfg = Debug|x86
+		{8ACD26CF-9F12-4034-9F79-A1495D4D644E}.Debug|x86.Build.0 = Debug|x86
+		{8ACD26CF-9F12-4034-9F79-A1495D4D644E}.Release|x86.ActiveCfg = Release|x86
+		{8ACD26CF-9F12-4034-9F79-A1495D4D644E}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AB2CCA82-A324-4A60-8424-82E28AA63782}
+	EndGlobalSection
+EndGlobal
