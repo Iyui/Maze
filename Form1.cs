@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using System.Collections;
-namespace 迷宫
+namespace Maze
 {
     public partial class Form1 : Form
     {
@@ -23,8 +23,8 @@ namespace 迷宫
         protected static List<Image> PathImageList = new List<Image>();  //橘黄色的背景图片
         protected static List<Image> ImageList = new List<Image>();      //白色背景的图片
         protected static List<Image> LineImageList = new List<Image>();  //红线路径图片
-        protected int width = 30;    //迷宫的宽度-列数
-        protected int height = 10;   //迷宫的高度-行数
+        protected static int width = 30;    //迷宫的宽度-列数
+        protected static int height = 10;   //迷宫的高度-行数
         public static Queue<Point> MapCreateProcess = new Queue<Point>();
         public class Point
         {
@@ -190,7 +190,9 @@ namespace 迷宫
         private void Btn_createMap_Click(object sender, EventArgs e)
         {
             //btn_createMap.Enabled = false;
-            //Reset();
+            Reset();
+            width = (int)nudCol.Value;
+            height = (int)nudRow.Value;
             path = new int[height, width];
             map = new PictureBox[height, width];
             numMap = new int[height, width];
@@ -329,8 +331,8 @@ namespace 迷宫
                     p = new Point(m, n, numMap[m, n]);
                     MapCreateProcess.Enqueue(p);
                     CreateNumMap(x, y, t);  //递归
-                    p = new Point(m, n, numMap[m, n]);
-                    MapCreateProcess.Enqueue(p);
+                    //p = new Point(m, n, numMap[m, n]);
+                    //MapCreateProcess.Enqueue(p);
                 }
             }
         }

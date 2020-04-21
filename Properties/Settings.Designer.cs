@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace 迷宫.Properties
+namespace Maze.Properties
 {
 
 

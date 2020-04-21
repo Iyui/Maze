@@ -1,4 +1,4 @@
-﻿namespace 迷宫
+﻿namespace Maze
 {
     partial class Form1
     {
@@ -39,7 +39,13 @@
             this.DFSPath = new System.Windows.Forms.RadioButton();
             this.BFSPath = new System.Windows.Forms.RadioButton();
             this.tbarShowSpeed = new System.Windows.Forms.TrackBar();
+            this.nudCol = new System.Windows.Forms.NumericUpDown();
+            this.nudRow = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tbarShowSpeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCol)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudRow)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_createMap
@@ -57,8 +63,9 @@
             this.txt_str.Location = new System.Drawing.Point(12, 376);
             this.txt_str.Multiline = true;
             this.txt_str.Name = "txt_str";
-            this.txt_str.Size = new System.Drawing.Size(588, 212);
+            this.txt_str.Size = new System.Drawing.Size(207, 209);
             this.txt_str.TabIndex = 1;
+            this.txt_str.Visible = false;
             // 
             // btn_test
             // 
@@ -78,6 +85,7 @@
             this.lb_x.Size = new System.Drawing.Size(29, 12);
             this.lb_x.TabIndex = 3;
             this.lb_x.Text = "lb_x";
+            this.lb_x.Visible = false;
             // 
             // lb_y
             // 
@@ -87,50 +95,54 @@
             this.lb_y.Size = new System.Drawing.Size(41, 12);
             this.lb_y.TabIndex = 4;
             this.lb_y.Text = "label2";
+            this.lb_y.Visible = false;
             // 
             // FillPath
             // 
             this.FillPath.AutoSize = true;
-            this.FillPath.Location = new System.Drawing.Point(621, 391);
+            this.FillPath.Location = new System.Drawing.Point(813, 413);
             this.FillPath.Name = "FillPath";
             this.FillPath.Size = new System.Drawing.Size(95, 16);
             this.FillPath.TabIndex = 5;
             this.FillPath.TabStop = true;
             this.FillPath.Text = "radioButton1";
             this.FillPath.UseVisualStyleBackColor = true;
+            this.FillPath.Visible = false;
             this.FillPath.CheckedChanged += new System.EventHandler(this.ModelChanged);
             // 
             // LinePath
             // 
             this.LinePath.AutoSize = true;
-            this.LinePath.Location = new System.Drawing.Point(621, 413);
+            this.LinePath.Location = new System.Drawing.Point(813, 435);
             this.LinePath.Name = "LinePath";
             this.LinePath.Size = new System.Drawing.Size(95, 16);
             this.LinePath.TabIndex = 6;
             this.LinePath.TabStop = true;
             this.LinePath.Text = "radioButton2";
             this.LinePath.UseVisualStyleBackColor = true;
+            this.LinePath.Visible = false;
             this.LinePath.CheckedChanged += new System.EventHandler(this.ModelChanged);
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(683, 321);
+            this.checkBox1.Location = new System.Drawing.Point(813, 391);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(78, 16);
             this.checkBox1.TabIndex = 7;
             this.checkBox1.Text = "checkBox1";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.Visible = false;
             // 
             // DFSPath
             // 
             this.DFSPath.AutoSize = true;
-            this.DFSPath.Location = new System.Drawing.Point(621, 435);
+            this.DFSPath.Location = new System.Drawing.Point(380, 435);
             this.DFSPath.Name = "DFSPath";
-            this.DFSPath.Size = new System.Drawing.Size(95, 16);
+            this.DFSPath.Size = new System.Drawing.Size(299, 16);
             this.DFSPath.TabIndex = 8;
             this.DFSPath.TabStop = true;
-            this.DFSPath.Text = "深度优先搜索";
+            this.DFSPath.Text = "深度优先搜索(选择该项创建迷宫时会显示生成过程)";
             this.DFSPath.UseVisualStyleBackColor = true;
             this.DFSPath.CheckedChanged += new System.EventHandler(this.ModelChanged);
             // 
@@ -138,7 +150,7 @@
             // 
             this.BFSPath.AutoSize = true;
             this.BFSPath.Checked = true;
-            this.BFSPath.Location = new System.Drawing.Point(621, 457);
+            this.BFSPath.Location = new System.Drawing.Point(380, 413);
             this.BFSPath.Name = "BFSPath";
             this.BFSPath.Size = new System.Drawing.Size(95, 16);
             this.BFSPath.TabIndex = 9;
@@ -149,7 +161,7 @@
             // 
             // tbarShowSpeed
             // 
-            this.tbarShowSpeed.Location = new System.Drawing.Point(760, 446);
+            this.tbarShowSpeed.Location = new System.Drawing.Point(621, 467);
             this.tbarShowSpeed.Maximum = 100;
             this.tbarShowSpeed.Minimum = 1;
             this.tbarShowSpeed.Name = "tbarShowSpeed";
@@ -158,11 +170,77 @@
             this.tbarShowSpeed.Value = 30;
             this.tbarShowSpeed.Scroll += new System.EventHandler(this.tbarShowSpeed_Scroll);
             // 
+            // nudCol
+            // 
+            this.nudCol.Location = new System.Drawing.Point(413, 457);
+            this.nudCol.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.nudCol.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nudCol.Name = "nudCol";
+            this.nudCol.Size = new System.Drawing.Size(120, 21);
+            this.nudCol.TabIndex = 11;
+            this.nudCol.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            // 
+            // nudRow
+            // 
+            this.nudRow.Location = new System.Drawing.Point(413, 484);
+            this.nudRow.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.nudRow.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudRow.Name = "nudRow";
+            this.nudRow.Size = new System.Drawing.Size(120, 21);
+            this.nudRow.TabIndex = 12;
+            this.nudRow.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(380, 458);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(29, 12);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "列数";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(380, 486);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 12);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "行数";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(939, 606);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.nudRow);
+            this.Controls.Add(this.nudCol);
             this.Controls.Add(this.tbarShowSpeed);
             this.Controls.Add(this.BFSPath);
             this.Controls.Add(this.DFSPath);
@@ -179,6 +257,8 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tbarShowSpeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCol)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudRow)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -197,6 +277,10 @@
         private System.Windows.Forms.RadioButton DFSPath;
         private System.Windows.Forms.RadioButton BFSPath;
         private System.Windows.Forms.TrackBar tbarShowSpeed;
+        private System.Windows.Forms.NumericUpDown nudCol;
+        private System.Windows.Forms.NumericUpDown nudRow;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
 
