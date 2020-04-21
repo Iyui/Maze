@@ -25,7 +25,11 @@ namespace Maze
         protected static List<Image> LineImageList = new List<Image>();  //红线路径图片
         protected static int width = 30;    //迷宫的宽度-列数
         protected static int height = 10;   //迷宫的高度-行数
-        public static Queue<Point> MapCreateProcess = new Queue<Point>();
+        protected static Queue<Point> MapCreateProcess = new Queue<Point>();
+
+        protected delegate void SetTextValueCallBack(string strValue);
+        //声明回调
+        protected static SetTextValueCallBack setCallBack;
         public class Point
         {
             public Point(int x, int y, int b=0)
@@ -190,6 +194,7 @@ namespace Maze
         private void Btn_createMap_Click(object sender, EventArgs e)
         {
             //btn_createMap.Enabled = false;
+            setCallBack = new SetTextValueCallBack(SetTextValue);
             Reset();
             width = (int)nudCol.Value;
             height = (int)nudRow.Value;
@@ -199,7 +204,7 @@ namespace Maze
             DrawCheckerboar();
             CreateNumMap(height / 2, width / 2, 0);//在迷宫的中间开始遍历
             //CreateNumMap(0, 0, 0);
-            if (bsDFSPath)
+            if (checkBox1.Checked)
             {
                 var show =new PathShow.DFSDelayPathShow();
                 show.ShowMap();
@@ -207,6 +212,15 @@ namespace Maze
             else
                 CreateMap();
             SetStartingEndingPoint(0, 0, height - 1, width - 1);
+        }
+
+        public void SetTextValue(string strMsg)
+        {
+            strMsg = $"共经过节点[{strMsg}]个";
+            if (bsBFSPath)
+                BFSInfo.Text = strMsg;
+            else
+                DFSInfo.Text = strMsg;
         }
 
         private void SetStartingEndingPoint(int sX,int sY,int eX,int eY)
@@ -359,9 +373,9 @@ namespace Maze
         private void btn_test_Click(object sender, EventArgs e)
         {
             PathShow ps = new PathShow();
-            ps.Pathfinding(StartingPoing.X, StartingPoing.Y);
             path = new int[height, width];
             CreateMap();
+            ps.Pathfinding(StartingPoing.X, StartingPoing.Y);
         }
 
         //重置当前迷宫
@@ -423,7 +437,10 @@ namespace Maze
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-       
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //Application.Exit();
+        }
     }
     public class PathShow : Form1
     {
@@ -563,6 +580,7 @@ namespace Maze
             public void ShowMap()
             {
                 Thread td = new Thread(new ThreadStart(ShowMap2));
+                td.IsBackground = true;
                 td.Start();
                 //td.Join();
             }
@@ -631,18 +649,20 @@ namespace Maze
             {
                 isCompleted = true;
                 Thread td = new Thread(new ThreadStart(DelayShow));
+                td.IsBackground = true;
                 td.Start();
                // td.Join();
             }
             public void DelayShow()
             {
+                //DFSInfo.Invoke(setCallBack, DFSpath.Count.ToString());
                 while (DFSpath.Count != 0)
                 {
                     var p = DFSpath.Dequeue();          
                     map[p.X, p.Y].Image = PathImageList[numMap[p.X, p.Y]];
-                    Thread.Sleep(isShowSpeed+30);
+                    Thread.Sleep(isShowSpeed/2);
                     map[p.X, p.Y].Image = LineImageList[numMap[p.X, p.Y]];
-                    Thread.Sleep(isShowSpeed);
+                    Thread.Sleep(isShowSpeed/2);
                 }
                 isCompleted = false;
 
@@ -662,6 +682,7 @@ namespace Maze
             public override void ShowLine()
             {
                 Thread td = new Thread(new ThreadStart(BFSShow));
+                td.IsBackground = true;
                 td.Start();
                 //td.Join();
             }
@@ -711,13 +732,15 @@ namespace Maze
                     if (x == height - 1 && y == width - 1)
                         break;
                 }
+               // setCallBack = new SetTextValueCallBack(SetTextValue);
+               //if(BFSInfo.IsHandleCreated)
+               // BFSInfo.Invoke(setCallBack, BFSDelaypath.Count.ToString());
                 while (BFSDelaypath.Count != 0)
                 {
                     var p3 = BFSDelaypath.Dequeue();
                     map[p3.X, p3.Y].Image = LineImageList[numMap[p3.X, p3.Y]];
                     Thread.Sleep(isShowSpeed);
                 }
-
             }
         }
 

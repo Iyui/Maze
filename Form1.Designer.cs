@@ -43,6 +43,8 @@
             this.nudRow = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.BFSInfo = new System.Windows.Forms.Label();
+            this.DFSInfo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tbarShowSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCol)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudRow)).BeginInit();
@@ -50,7 +52,7 @@
             // 
             // btn_createMap
             // 
-            this.btn_createMap.Location = new System.Drawing.Point(621, 543);
+            this.btn_createMap.Location = new System.Drawing.Point(380, 535);
             this.btn_createMap.Name = "btn_createMap";
             this.btn_createMap.Size = new System.Drawing.Size(75, 23);
             this.btn_createMap.TabIndex = 0;
@@ -69,7 +71,7 @@
             // 
             // btn_test
             // 
-            this.btn_test.Location = new System.Drawing.Point(702, 543);
+            this.btn_test.Location = new System.Drawing.Point(461, 535);
             this.btn_test.Name = "btn_test";
             this.btn_test.Size = new System.Drawing.Size(75, 23);
             this.btn_test.TabIndex = 2;
@@ -80,7 +82,7 @@
             // lb_x
             // 
             this.lb_x.AutoSize = true;
-            this.lb_x.Location = new System.Drawing.Point(619, 528);
+            this.lb_x.Location = new System.Drawing.Point(378, 520);
             this.lb_x.Name = "lb_x";
             this.lb_x.Size = new System.Drawing.Size(29, 12);
             this.lb_x.TabIndex = 3;
@@ -90,7 +92,7 @@
             // lb_y
             // 
             this.lb_y.AutoSize = true;
-            this.lb_y.Location = new System.Drawing.Point(655, 528);
+            this.lb_y.Location = new System.Drawing.Point(414, 520);
             this.lb_y.Name = "lb_y";
             this.lb_y.Size = new System.Drawing.Size(41, 12);
             this.lb_y.TabIndex = 4;
@@ -126,23 +128,22 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(813, 391);
+            this.checkBox1.Location = new System.Drawing.Point(382, 427);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(78, 16);
+            this.checkBox1.Size = new System.Drawing.Size(120, 16);
             this.checkBox1.TabIndex = 7;
-            this.checkBox1.Text = "checkBox1";
+            this.checkBox1.Text = "显示生成迷宫过程";
             this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.Visible = false;
             // 
             // DFSPath
             // 
             this.DFSPath.AutoSize = true;
-            this.DFSPath.Location = new System.Drawing.Point(380, 435);
+            this.DFSPath.Location = new System.Drawing.Point(383, 403);
             this.DFSPath.Name = "DFSPath";
-            this.DFSPath.Size = new System.Drawing.Size(299, 16);
+            this.DFSPath.Size = new System.Drawing.Size(95, 16);
             this.DFSPath.TabIndex = 8;
             this.DFSPath.TabStop = true;
-            this.DFSPath.Text = "深度优先搜索(选择该项创建迷宫时会显示生成过程)";
+            this.DFSPath.Text = "深度优先搜索";
             this.DFSPath.UseVisualStyleBackColor = true;
             this.DFSPath.CheckedChanged += new System.EventHandler(this.ModelChanged);
             // 
@@ -150,7 +151,7 @@
             // 
             this.BFSPath.AutoSize = true;
             this.BFSPath.Checked = true;
-            this.BFSPath.Location = new System.Drawing.Point(380, 413);
+            this.BFSPath.Location = new System.Drawing.Point(383, 381);
             this.BFSPath.Name = "BFSPath";
             this.BFSPath.Size = new System.Drawing.Size(95, 16);
             this.BFSPath.TabIndex = 9;
@@ -161,9 +162,9 @@
             // 
             // tbarShowSpeed
             // 
-            this.tbarShowSpeed.Location = new System.Drawing.Point(621, 467);
+            this.tbarShowSpeed.Location = new System.Drawing.Point(566, 460);
             this.tbarShowSpeed.Maximum = 100;
-            this.tbarShowSpeed.Minimum = 1;
+            this.tbarShowSpeed.Minimum = 2;
             this.tbarShowSpeed.Name = "tbarShowSpeed";
             this.tbarShowSpeed.Size = new System.Drawing.Size(104, 45);
             this.tbarShowSpeed.TabIndex = 10;
@@ -232,11 +233,31 @@
             this.label2.TabIndex = 14;
             this.label2.Text = "行数";
             // 
+            // BFSInfo
+            // 
+            this.BFSInfo.AutoSize = true;
+            this.BFSInfo.Location = new System.Drawing.Point(510, 385);
+            this.BFSInfo.Name = "BFSInfo";
+            this.BFSInfo.Size = new System.Drawing.Size(11, 12);
+            this.BFSInfo.TabIndex = 15;
+            this.BFSInfo.Text = "1";
+            // 
+            // DFSInfo
+            // 
+            this.DFSInfo.AutoSize = true;
+            this.DFSInfo.Location = new System.Drawing.Point(510, 407);
+            this.DFSInfo.Name = "DFSInfo";
+            this.DFSInfo.Size = new System.Drawing.Size(11, 12);
+            this.DFSInfo.TabIndex = 16;
+            this.DFSInfo.Text = "1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(939, 606);
+            this.Controls.Add(this.DFSInfo);
+            this.Controls.Add(this.BFSInfo);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.nudRow);
@@ -255,6 +276,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tbarShowSpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCol)).EndInit();
@@ -265,8 +287,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btn_createMap;
         private System.Windows.Forms.TextBox txt_str;
         private System.Windows.Forms.Button btn_test;
         private System.Windows.Forms.Label lb_x;
@@ -281,6 +301,9 @@
         private System.Windows.Forms.NumericUpDown nudRow;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btn_createMap;
+        private System.Windows.Forms.Label BFSInfo;
+        private System.Windows.Forms.Label DFSInfo;
     }
 }
 
